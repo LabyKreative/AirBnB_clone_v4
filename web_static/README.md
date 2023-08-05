@@ -1,1 +1,1 @@
-** Web Static AirBnB
+AirBnB Static files
