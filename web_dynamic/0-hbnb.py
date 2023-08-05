@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/python3
 
 # Copy files and folders
 cp -r web_flask/static web_dynamic/
