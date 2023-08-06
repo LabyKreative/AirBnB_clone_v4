@@ -1,35 +1,57 @@
-import shutil
-import os
+#!/usr/bin/python3
+""" Starts a Flash Web Application """
+from models import storage
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from os import environ
+import uuid
+from flask import Flask, render_template
+app = Flask(__name__)
+def run_app():
+    cache_id = str(uuid.uuid4())
+    return render_template('0-hbnb.html', cache_id=cache_id)
 
-"""Define the source and destination directories"""
-source_dir = "web_flask"
-destination_dir = "web_dynamic"
+@app.route('/0-hbnb/')
+def index():
+    return run_app()
 
-"""Copy the static directory"""
-shutil.copytree(os.path.join(source_dir, "static"), os.path.join(destination_dir, "static"))
+if __name__ == '__main__':
+    run_app()
 
-"""Copy the template directory"""
-shutil.copytree(os.path.join(source_dir, "templates"), os.path.join(destination_dir, "templates"))
+# app.jinja_env.trim_blocks = True
+# app.jinja_env.lstrip_blocks = True
 
-"""Copy __init__.py"""
-shutil.copyfile(os.path.join(source_dir, "__init__.py"), os.path.join(destination_dir, "__init__.py"))
 
-"""Copy 100-hbnb.py and rename it to 0-hbnb.py"""
-shutil.copyfile(os.path.join(source_dir, "100-hbnb.py"), os.path.join(destination_dir, "0-hbnb.py"))
+@app.teardown_appcontext
+def close_db(error):
+    """ Remove the current SQLAlchemy Session """
+    storage.close()
 
-"""Check if 100-hbnb.html exists, if not, use 8-hbnb.html"""
-if os.path.exists(os.path.join(source_dir, "templates", "100-hbnb.html")):
-    shutil.copyfile(os.path.join(source_dir, "templates", "100-hbnb.html"), os.path.join(destination_dir, "0-hbnb.html"))
-else:
-    shutil.copyfile(os.path.join(source_dir, "templates", "8-hbnb.html"), os.path.join(destination_dir, "0-hbnb.html"))
 
-"""Update 0-hbnb.py to replace the existing route to /0-hbnb/"""
-with open(os.path.join(destination_dir, "0-hbnb.py"), "r+") as file:
-    content = file.read()
-    content = content.replace("/100-hbnb/", "/0-hbnb/")
-    file.seek(0)
-    file.write(content)
-    file.truncate()
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    """ HBNB is alive! """
+    states = storage.all(State).values()
+    states = sorted(states, key=lambda k: k.name)
+    st_ct = []
 
-"""Start the Flask web application"""
-os.system("python3 web_dynamic/0-hbnb.py")
+    for state in states:
+        st_ct.append([state, sorted(state.cities, key=lambda k: k.name)])
+
+    amenities = storage.all(Amenity).values()
+    amenities = sorted(amenities, key=lambda k: k.name)
+
+    places = storage.all(Place).values()
+    places = sorted(places, key=lambda k: k.name)
+
+    return render_template('100-hbnb.html',
+                           states=st_ct,
+                           amenities=amenities,
+                           places=places)
+
+
+if __name__ == "__main__":
+    """ Main Function """
+    app.run(host='0.0.0.0', port=5000)
