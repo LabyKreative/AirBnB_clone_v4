@@ -6,37 +6,20 @@
 
     <META charset="utf-8">
     <META name="viewport" content="width=device-width">
-    <TITLE>HolbertonBnB</TITLE>
-
-    <!-- FAVICON -->
+    <TITLE>AirBnB</TITLE>
 
     <LINK rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') + '?' + cache_id }}">
-
-    <!-- **********************
-	 CSS styles
-	 ********************** -->
-
     <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') + '?' + cache_id }}">
     <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') + '?' + cache_id }}">
     <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') + '?' + cache_id }}">
     <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') + '?' + cache_id }}">
     <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css') + '?' + cache_id }}">
     <LINK rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css') + '?' + cache_id }}">
-
-    <!-- jQUERY -->
     <SCRIPT src="https://code.jquery.com/jquery-3.2.1.min.js"></SCRIPT>
     <SCRIPT src="{{ url_for('static', filename='scripts/2-hbnb.js') + '?' + cache_id }}"></SCRIPT>
   </HEAD>
 
-  <!-- **********************
-       BODY
-       ********************** -->
-
   <BODY>
-
-    <!-- **********************
-	 HEADER
-	 ********************** -->
 
     <HEADER>
       <DIV id="api_status" class="available">
@@ -45,15 +28,7 @@
     <MAIN>
       <DIV class="container">
 
-	<!-- **********************
-	     FILTERS
-	     ********************** -->
-
 	<SECTION class="filters">
-
-	  <!-- **********************
-	       LOCATIONS
-	       ********************** -->
 
 	  <DIV class="locations">
 	    <H3>States</H3>
@@ -70,10 +45,6 @@
 	    </UL>
 	  </DIV>
 
-	  <!-- **********************
-	       AMENITIES
-	       ********************** -->
-
 	  <DIV class="amenities">
 	    <H3>Amenities</H3>
 	    <H4>&nbsp;</H4>
@@ -88,19 +59,11 @@
 	    </UL>
 	  </DIV>
 
-	  <!-- **********************
-	       SEARCH BUTTON
-	       ********************** -->
-
 	  <BUTTON>Search</BUTTON>
 	</SECTION>
 
 	<SECTION class="places">
 	  <H1>Places</H1>
-
-	<!-- **********************
-	     BEGIN 1 PLACE
-	     ********************** -->
 
 	  {% for place in places|sort(attribute='name') %}
 
@@ -142,10 +105,6 @@
 	      </DIV>
 	    </DIV>
 
-	    <!-- **********************
-		 USER
-		 **********************  -->
-
 	    <DIV class="user">
 
 	      <STRONG>Owner: {{ users[place.user_id] }}</STRONG>
@@ -165,10 +124,8 @@
       </DIV>
     </MAIN>
 
-    <!-- FOOTER -->
-
     <FOOTER>
-      Holberton School
+      Best School
     </FOOTER>
   </BODY>
 </HTML>

@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
-    <!-- HEAD -->
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Holberton AirBnB</title>
-
-    <!-- FAVICON -->
-
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') + '?' + cache_id }}">
-
-    <!-- **********************
-	 CSS styles
-	 ********************** -->
-
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') + '?' + cache_id }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') + '?' + cache_id }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') + '?' + cache_id }}">
@@ -24,31 +13,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome.css') + '?' + cache_id }}">
   </head>
 
-  <!-- **********************
-       BODY
-       ********************** -->
-
   <body>
-
-    <!-- **********************
-	 HEADER
-	 ********************** -->
-
     <header>
     </header>
     <main>
       <div class="container">
-
-	<!-- **********************
-	     FILTERS
-	     ********************** -->
-
 	<section class="filters">
-
-	  <!-- **********************
-	       LOCATIONS
-	       ********************** -->
-
 	  <div class="locations">
 	    <h3>States</h3>
 	    <h4>&nbsp;</h4>
@@ -63,11 +33,6 @@
 	      {% endfor %}
 	    </ul>
 	  </div>
-
-	  <!-- **********************
-	       AMENITIES
-	       ********************** -->
-
 	  <div class="amenities">
 	    <h3>Amenities</h3>
 	    <h4>&nbsp;</h4>
@@ -78,20 +43,11 @@
 	    </ul>
 	  </div>
 
-	  <!-- **********************
-	       SEARCH BUTTON
-	       ********************** -->
-
 	  <button>Search</button>
 	</section>
 
 	<section class="places">
 	  <h1>Places</h1>
-
-	<!-- **********************
-	     BEGIN 1 PLACE
-	     ********************** -->
-
 	  {% for place in places|sort(attribute='name') %}
 
 	  <article>
@@ -132,10 +88,6 @@
 	      </div>
 	    </div>
 
-	    <!-- **********************
-		 USER
-		 **********************  -->
-
 	    <div class="user">
 
 	      <strong>Owner: {{ users[place.user_id] }}</strong>
@@ -158,7 +110,7 @@
     <!-- FOOTER -->
 
     <footer>
-      Holberton School
+      Best School
     </footer>
   </body>
 </html>
