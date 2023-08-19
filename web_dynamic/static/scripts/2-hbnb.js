@@ -26,7 +26,7 @@ $(document).ready(function () {
   });
 
   // Perform an AJAX GET request to retrieve the API status information.
-  $.get('http://0.0.0.0:5001/api/v1/status/', function (data, textStatus) {
+  $.get('http://0.0.0.0:5003/api/v1/status/', function (data, textStatus) {
     // Check if the request was successful.
     if (textStatus === 'success') {
       // Check if the API status is 'OK'.
